@@ -1,368 +1,125 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTLA Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px;
+    }
 
-<title>
-MBTLA Demo
-</title>
+    h1 {
+      text-align: center;
+    }
 
+    .section {
+      margin-top: 60px;
+    }
 
-<style>
+    .sample {
+      margin-top: 50px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #f5f5f5;
+    }
 
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
 
-body{
+    .audio-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
 
-font-family:
-Arial;
+    .audio-item {
+      text-align: center;
+      font-size: 14px;
+    }
 
-max-width:
-1200px;
+    .audio-item p {
+      margin: 0 0 5px;
+      font-weight: bold;
+    }
 
-margin:auto;
+    audio {
+      width: 100%;
+    }
 
-padding:30px;
-
-}
-
-
-h1{
-
-text-align:center;
-
-}
-
-
-.section{
-
-margin-top:60px;
-
-}
-
-
-.sample{
-
-margin-top:50px;
-
-padding:20px;
-
-border-radius:15px;
-
-background:#f5f5f5;
-
-}
-
-
-img{
-
-width:100%;
-
-border-radius:10px;
-
-}
-
-
-
-.audio-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(2,1fr);
-
-gap:15px;
-
-margin-top:20px;
-
-}
-
-
-audio{
-
-width:100%;
-
-}
-
-
-
-</style>
-
-
+    @media (max-width: 800px) {
+      .audio-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
-
-
-
 <body>
 
-
-
-<h1>
-
-MBTLA:
-Multi-Branch Temporal Linear Attention
-with Adaptive Retention Gate
-
-</h1>
-
-
-
-<!-- ======================= -->
-<!-- Section 1 -->
-<!-- ======================= -->
-
-
-<div class="section">
-
-
-<h2>
-1. Model Introduction
-</h2>
-
-
-<p>
-
-(To be added)
-
-</p>
-
-
-</div>
-
-
-
-
-
-<!-- ======================= -->
-<!-- Section 2 -->
-<!-- ======================= -->
-
-
-<div class="section">
-
-
-<h2>
-2. Audio Examples
-</h2>
-
-
-
-
-
-<div class="sample">
-
-
-<h3>
-Example 1: Sample 0013
-</h3>
-
-
-<img src="demo/pictures/0013.png">
-
-
-<div class="audio-grid">
-
-
-<div>
-<p>Clean</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_clean.wav">
-
-</audio>
-
-</div>
-
-
-
-<div>
-
-<p>Noisy</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_noisy.wav">
-
-</audio>
-
-</div>
-
-
-
-
-<div>
-
-<p>MBTLA</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_FBTLA.wav">
-
-</audio>
-
-</div>
-
-
-
-
-<div>
-
-<p>ULUNAS</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_ULUNAS.wav">
-
-</audio>
-
-</div>
-
-
-
-<div>
-
-<p>GTCRN</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_GTCRN.wav">
-
-</audio>
-
-</div>
-
-
-
-<div>
-
-<p>LiSenNet</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_LiSenNet.wav">
-
-</audio>
-
-</div>
-
-
-
-
-<div>
-
-<p>AdaptCRN</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_AdaptCRN.wav">
-
-</audio>
-
-</div>
-
-
-
-
-<div>
-
-<p>FastEnhancer-Base</p>
-
-<audio controls>
-
-<source src="demo/audio/0013_FastEnhancer_Base.wav">
-
-</audio>
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- Example 2 -->
-
-<div class="sample">
-
-<h3>
-Example 2: Sample 0014
-</h3>
-
-
-<img src="demo/pictures/0014.png">
-
-
-<!-- same audio block -->
-
-</div>
-
-
-
-
-
-
-
-<!-- Example 3 -->
-
-<div class="sample">
-
-<h3>
-Example 3: Sample 0020
-</h3>
-
-
-<img src="demo/pictures/0020.png">
-
-
-<!-- same audio block -->
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-<!-- ======================= -->
-<!-- Section 3 -->
-<!-- ======================= -->
-
-
-<div class="section">
-
-
-<h2>
-3. Visualization
-</h2>
-
-
-<p>
-
-(To be added)
-
-</p>
-
-
-</div>
-
-
+  <h1>MBTLA: Multi-Branch Temporal Linear Attention with Adaptive Retention Gate</h1>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <h2>1. Model Introduction</h2>
+    <p>(To be added)</p>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <h2>2. Audio Examples</h2>
+    <div id="examples"></div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <h2>3. Visualization</h2>
+    <p>(To be added)</p>
+  </div>
+
+  <script>
+    const samples = ["0013", "0014", "0020"];
+
+    const methods = [
+      { label: "Clean", files: ["clean"] },
+      { label: "Noisy", files: ["noisy"] },
+      { label: "MBTLA", files: ["MBTLA", "FBTLA", "mbtla"] },
+      { label: "ULUNAS", files: ["ULUNAS"] },
+      { label: "GTCRN", files: ["GTCRN"] },
+      { label: "LiSenNet", files: ["LiSenNet"] },
+      { label: "AdaptCRN", files: ["AdaptCRN"] },
+      { label: "FastEnhancer-Base", files: ["FastEnhancer_Base", "FastEnhancer-Base"] }
+    ];
+
+    function audioHTML(id, files) {
+      const sources = files.map(f =>
+        `<source src="demo/audio/${id}_${f}.wav" type="audio/wav">`
+      ).join("");
+      return `<audio controls preload="none">${sources}</audio>`;
+    }
+
+    document.getElementById("examples").innerHTML = samples.map((id, i) => {
+      const items = methods.map(m => {
+        return `<div class="audio-item">
+                  <p>${m.label}</p>
+                  ${audioHTML(id, m.files)}
+                </div>`;
+      }).join("");
+
+      return `
+        <div class="sample">
+          <h3>Example ${i + 1}: Sample ${id}</h3>
+          <img src="demo/pictures/${id}.png" alt="Sample ${id} spectrogram" loading="lazy">
+          <div class="audio-grid-4">${items}</div>
+        </div>
+      `;
+    }).join("");
+  </script>
 
 </body>
-
-
 </html>
