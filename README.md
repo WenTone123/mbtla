@@ -4,7 +4,7 @@ Project page for **MBTLA: Multi-Branch Temporal Linear Attention with Adaptive R
 
 **Website:** https://wentone123.github.io/mbtla/
 
-The page contains a model introduction, 20 audio comparisons across eight signals, and Figures 2 and 3 from the manuscript. All model descriptions and aggregate metrics come from the supplied manuscript. Demo excerpts are 8-second, 16 kHz mono WAV files. The original audio files are unchanged.
+The page contains a model introduction, 20 audio comparisons across eight signals, the original manuscript Figures 2 and 3, branch-specific memory maps, and a combined TRA/context-RMS figure with panels (a) and (b). All model descriptions and aggregate metrics come from the supplied manuscript. Demo excerpts are 8-second, 16 kHz mono WAV files. The original audio files are unchanged.
 
 ## Preview locally
 
