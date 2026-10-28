@@ -3,58 +3,75 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MBTLA: Multi-Branch Temporal Linear Attention with Adaptive Retention Gate for Lightweight Speech Enhancement. Model overview, audio comparisons, and learned memory visualizations.">
+  <meta name="description" content="Anonymous supplementary material for MBTLA: performance comparisons, audio examples, and temporal attention analysis.">
   <meta name="theme-color" content="#183d51">
-  <title>MBTLA | Lightweight Speech Enhancement</title>
+  <title>MBTLA | Supplementary Material</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="assets/app.js" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=20261028">
+  <script src="assets/app.js?v=20261028" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="nav-wrap">
-      <a class="wordmark" href="#top" aria-label="MBTLA home"><span class="logo-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span> MBTLA</a>
-      <nav aria-label="Main navigation"><a href="#introduction">Model</a><a href="#audio">Audio examples</a><a href="#visualization">Visualization</a><a class="repo-link" href="https://github.com/WenTone123/mbtla" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></nav>
+  <header class="hero" id="top">
+    <div class="container">
+      <p class="eyebrow"><span aria-hidden="true"></span> ICASSP 2027 SUBMISSION</p>
+      <h1><span class="model-name">MBTLA:</span> Multi-Branch Temporal Linear Attention<br class="desktop-break"> with Adaptive Retention Gate<br class="desktop-break"> for Lightweight Speech Enhancement</h1>
+      <p class="anonymous-note">Anonymous supplementary material</p>
     </div>
   </header>
+  <nav class="panel-navigation" aria-label="Supplementary material sections">
+    <div class="tab-list" role="tablist" aria-label="Content sections">
+      <button class="tab-button" type="button" id="tab-results" role="tab" aria-selected="true" aria-controls="results" tabindex="0">Results</button>
+      <button class="tab-button" type="button" id="tab-audio" role="tab" aria-selected="false" aria-controls="audio" tabindex="-1">Audio Examples</button>
+      <button class="tab-button" type="button" id="tab-analysis" role="tab" aria-selected="false" aria-controls="analysis" tabindex="-1">Analysis</button>
+    </div>
+  </nav>
   <main id="main">
-    <section class="hero container" id="top">
-      <div class="eyebrow"><span></span> ICASSP 2027 SUBMISSION · AUDIO DEMO</div>
-      <h1>MBTLA<span class="title-dot">.</span></h1>
-      <p class="paper-title">Multi-Branch Temporal Linear Attention<br class="desktop-break"> with Adaptive Retention Gate<br class="desktop-break"> for Lightweight Speech Enhancement</p>
-      <p class="authors">Wentao Hua<sup>1,2,†</sup>, Yifei Yang<sup>1,2,†</sup>, Leyan Yang<sup>1,2</sup>, Jun Gao<sup>1,2</sup>,<br class="desktop-break"> Yuxiang Hu<sup>2</sup>, Changbao Zhu<sup>2</sup>, Jing Lu<sup>1,2,*</sup></p>
-      <p class="affiliations"><sup>1</sup> Key Laboratory of Modern Acoustics, Nanjing University<br><sup>2</sup> NJU-Horizon Intelligent Audio Lab, Horizon Robotics</p>
-      <p class="author-note">† Equal contribution &nbsp; · &nbsp; * Corresponding author</p>
-      <div class="hero-actions"><a class="button primary" href="#audio"><span aria-hidden="true">▶</span> Listen to examples</a><a class="button secondary" href="https://github.com/WenTone123/mbtla" target="_blank" rel="noopener">Project repository <span aria-hidden="true">↗</span></a></div>
-      <div class="hero-bottom"><span>CAUSAL PROCESSING</span><span>LINEAR-TIME ATTENTION</span><span>ADAPTIVE MEMORY</span></div>
-    </section>
-
-    <section class="section container" id="introduction" aria-labelledby="intro-title">
-      <div class="section-heading"><div><p class="eyebrow">THE MODEL</p><h2 id="intro-title"><span>1.</span> Model Introduction</h2></div><p class="section-aside">Efficient temporal modeling.<br>Content-dependent memory.</p></div>
-      <div class="intro-copy"><p class="lead">A compact, causal attention backbone for speech enhancement on resource-constrained devices.</p><p>MBTLA maintains a fixed-resolution, ERB-band representation across stacked Causal Linear Attention (CLA) blocks. Independent bandwise projections compress the features, which are partitioned into non-overlapping frequency branches for efficient temporal modeling. An <strong>adaptive retention gate</strong> controls how much history each branch keeps, while denominator normalization keeps the retrieved content and its normalization aligned with the same retained history.</p></div>
-      <div class="principles">
-        <article><span class="principle-number">01 / REPRESENTATION</span><h3>Split. Compress. Branch.</h3><p>ERB-spaced bands preserve spectral structure. Bandwise compression reduces the attention dimension; four branches jointly cover the spectrum.</p></article>
-        <article><span class="principle-number">02 / TEMPORAL MODELING</span><h3>Retain what matters.</h3><p>A content-dependent scalar gate decays both the content and normalization states, adapting memory across frames, branches, and block depths.</p></article>
-        <article><span class="principle-number">03 / EFFICIENCY</span><h3>Keep memory bounded.</h3><p>Fixed-size recurrent states summarize the past, giving linear time complexity in sequence length and constant state memory.</p></article>
+    <section class="section container tab-panel" id="results" role="tabpanel" aria-labelledby="tab-results" tabindex="0">
+      <div class="section-heading"><div><p class="eyebrow">PERFORMANCE COMPARISON</p><h2>Results on DNS3</h2></div><p class="section-aside">Standard and larger<br>model configurations</p></div>
+      <p class="section-description">Comparison on the simulated DNS3 test set. MBTLA is highlighted; bold values indicate the best result within each configuration group, including ties.</p>
+      <div class="table-card">
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Model performance table. Scroll horizontally to see all metrics." aria-describedby="table-note">
+          <table class="results-table">
+            <caption>Speech enhancement quality and computational cost</caption>
+            <thead><tr><th scope="col" rowspan="2">Model</th><th scope="col" rowspan="2">MACs/s<br><span>(M) ↓</span></th><th scope="col" rowspan="2">Params<br><span>(M) ↓</span></th><th scope="col" rowspan="2">RTF<br><span>(%) ↓</span></th><th scope="col" rowspan="2">PESQ<br><span>↑</span></th><th scope="col" rowspan="2">ESTOI<br><span>(%) ↑</span></th><th scope="col" rowspan="2">SI-SNR<br><span>(dB) ↑</span></th><th scope="col">DNSMOS</th><th scope="colgroup" colspan="3">DNSMOS P.835</th></tr><tr><th scope="col">P.808 ↑</th><th scope="col">OVRL ↑</th><th scope="col">SIG ↑</th><th scope="col">BAK ↑</th></tr></thead>
+            <tbody><tr class="reference"><th scope="row">Noisy</th><td>—</td><td>—</td><td>—</td><td>1.41</td><td>66.90</td><td>5.61</td><td>2.82</td><td>1.63</td><td>2.05</td><td>1.86</td></tr><tr class="table-group"><th scope="rowgroup" colspan="11">Level I · Standard configurations</th></tr>
+<tr class="baseline"><th scope="row">GTCRN</th><td><strong>33.0</strong></td><td><strong>0.024</strong></td><td>1.01</td><td>2.07</td><td>75.11</td><td>11.30</td><td>3.48</td><td>2.63</td><td>2.98</td><td>3.81</td></tr>
+<tr class="baseline"><th scope="row">LiSenNet</th><td>55.7</td><td>0.037</td><td>0.76</td><td>2.17</td><td>76.19</td><td>11.96</td><td>3.51</td><td>2.67</td><td>3.01</td><td>3.85</td></tr>
+<tr class="baseline"><th scope="row">UL-UNAS</th><td>38.2</td><td>0.147</td><td>1.80</td><td>2.24</td><td>77.67</td><td>12.07</td><td>3.55</td><td>2.68</td><td>3.01</td><td>3.86</td></tr>
+<tr class="baseline"><th scope="row">AdaptCRN</th><td>40.8</td><td>0.135</td><td>1.90</td><td><strong>2.29</strong></td><td>77.90</td><td>12.29</td><td><strong>3.57</strong></td><td><strong>2.72</strong></td><td><strong>3.05</strong></td><td>3.87</td></tr>
+<tr class="baseline"><th scope="row">FastEnhancer-Base</th><td>261.5</td><td>0.091</td><td>1.16</td><td>2.26</td><td>77.54</td><td>12.18</td><td><strong>3.57</strong></td><td>2.71</td><td>3.04</td><td><strong>3.88</strong></td></tr>
+<tr class="proposed"><th scope="row">MBTLA</th><td>34.6</td><td>0.367</td><td><strong>0.72</strong></td><td><strong>2.29</strong></td><td><strong>78.01</strong></td><td><strong>12.39</strong></td><td>3.55</td><td>2.70</td><td>3.04</td><td>3.86</td></tr><tr class="table-group"><th scope="rowgroup" colspan="11">Level II · Larger configurations</th></tr>
+<tr class="baseline"><th scope="row">GTCRN</th><td>102.7</td><td><strong>0.077</strong></td><td>1.97</td><td>2.24</td><td>77.29</td><td>12.08</td><td>3.55</td><td>2.68</td><td>3.02</td><td>3.86</td></tr>
+<tr class="baseline"><th scope="row">LiSenNet</th><td>210.2</td><td>0.133</td><td><strong>1.72</strong></td><td>2.36</td><td>78.58</td><td>12.72</td><td>3.56</td><td>2.73</td><td>3.06</td><td>3.87</td></tr>
+<tr class="baseline"><th scope="row">UL-UNAS</th><td>101.5</td><td>0.314</td><td>2.26</td><td>2.38</td><td>78.83</td><td>12.57</td><td>3.59</td><td>2.73</td><td>3.06</td><td>3.88</td></tr>
+<tr class="baseline"><th scope="row">AdaptCRN</th><td>101.2</td><td>0.249</td><td>3.43</td><td>2.38</td><td>78.94</td><td>12.50</td><td>3.59</td><td>2.73</td><td>3.07</td><td>3.88</td></tr>
+<tr class="baseline"><th scope="row">FastEnhancer-Small</th><td>663.9</td><td>0.194</td><td>2.21</td><td>2.37</td><td>78.86</td><td>12.62</td><td><strong>3.62</strong></td><td><strong>2.76</strong></td><td><strong>3.09</strong></td><td><strong>3.90</strong></td></tr>
+<tr class="proposed"><th scope="row">MBTLA</th><td><strong>100.1</strong></td><td>1.071</td><td>1.75</td><td><strong>2.40</strong></td><td><strong>79.25</strong></td><td><strong>12.75</strong></td><td>3.59</td><td>2.73</td><td>3.06</td><td>3.87</td></tr></tbody>
+          </table>
+        </div>
       </div>
-      <figure class="paper-figure architecture"><div class="figure-topline"><span>MODEL ARCHITECTURE</span><a href="assets/architecture.png" target="_blank" rel="noopener">Open full size ↗</a></div><a href="assets/architecture.png" target="_blank" rel="noopener" aria-label="Open the MBTLA architecture figure at full size"><img src="assets/architecture.png" width="2800" height="1400" alt="MBTLA architecture: ERB BandSplit, repeated CLA blocks with TRA, bandwise compression, multiple temporal linear attention branches, bandwise expansion, and magnitude-mask reconstruction. Insets detail TRA and the adaptive retention gate."></a><figcaption><strong>Figure 1.</strong> Overall MBTLA architecture, Temporal Recurrent Attention (TRA), bandwise compression and expansion, and normalized Linear Attention with adaptive retention.</figcaption></figure>
-      <div class="results-band"><div class="results-label"><strong>Standard configuration</strong><span>Reported in the manuscript</span></div><div><strong>34.6<span>M</span></strong><span>MACs / second</span></div><div><strong>0.367<span>M</span></strong><span>Parameters</span></div><div><strong>0.72<span>%</span></strong><span>CPU real-time factor</span></div><div><strong>2.29</strong><span>PESQ</span></div></div>
-      <p class="fine-print">Manuscript results on the simulated DNS3 test set. End-to-end RTF was measured on a single Intel Core i7-13700KF CPU. The larger configuration uses 100.1M MAC/s and 1.071M parameters, with a PESQ of 2.40.</p>
+      <p class="fine-print" id="table-note">↓ Lower is better. ↑ Higher is better. RTF is end-to-end processing time divided by input duration, reported as a percentage, on a single Intel Core i7-13700KF CPU. Results are reported in the manuscript.</p>
+      <p class="mobile-table-hint">Swipe across the table to see all metrics.</p>
     </section>
 
-    <section class="audio-section" id="audio" aria-labelledby="audio-title"><div class="container section">
-      <div class="section-heading"><div><p class="eyebrow">LISTEN & COMPARE</p><h2 id="audio-title"><span>2.</span> Audio Examples</h2></div><div class="sample-count">20 samples <span>×</span> 8 signals</div></div>
-      <p class="section-description">Compare MBTLA with the noisy input, clean reference, and five baseline systems. Select a sample, then listen across methods. Headphones are recommended.</p>
-      <noscript><p class="notice">Enable JavaScript to browse all samples. You can also <a href="demo/audio/MBTLA/0013.wav">listen to MBTLA sample 0013</a> directly.</p></noscript>
-      <div class="sample-picker"><div><label for="sample-select">Choose a sample</label><select id="sample-select"></select></div><div class="sample-navigation"><button id="previous-sample" class="icon-button" type="button" aria-label="Previous sample">←</button><span id="sample-position">01 / 20</span><button id="next-sample" class="icon-button" type="button" aria-label="Next sample">→</button></div></div>
-      <div class="listening-panel"><div class="listening-heading"><div><p class="eyebrow">AUDIO COMPARISON</p><h3 id="sample-title">Sample 0013</h3><p id="sample-meta">16 kHz · Mono · 8 seconds</p></div><div class="playback-tools"><label class="sync-label"><input id="sync-position" type="checkbox" checked> Keep position when switching</label><button id="reset-audio" class="text-button" type="button">↺ Reset playback</button></div></div>
-      <div id="players" class="players"></div><p id="playback-status" class="playback-status" role="status" aria-live="polite">Play any signal to start. Only one signal plays at a time.</p>
-      <details class="spectrogram-details"><summary>Compare spectrograms <span aria-hidden="true">+</span></summary><p>Computed from the audio files above using a shared color scale. Frequency: 0–8 kHz; display range: −80 to 0 dB relative to the largest STFT magnitude across the eight signals.</p><a id="spectrogram-link" href="assets/spectrograms/0013.png" target="_blank" rel="noopener"><img id="spectrogram" src="assets/spectrograms/0013.png" alt="Spectrogram comparison of all eight signals for sample 0013" loading="lazy" width="2400" height="1100"></a><p class="fine-print">Select the figure to open it at full size.</p></details></div>
-      <p class="fine-print audio-note">All demo files are 8-second, 16 kHz mono excerpts. Individual examples illustrate audible differences; aggregate results are reported in the manuscript.</p>
+    <section class="audio-section tab-panel" id="audio" role="tabpanel" aria-labelledby="tab-audio" tabindex="0" hidden><div class="container section">
+      <div class="section-heading"><div><p class="eyebrow">LISTEN & COMPARE</p><h2>Audio Examples</h2></div><div class="sample-count">20 samples <span>×</span> 8 signals</div></div>
+      <p class="section-description">Listen to MBTLA alongside the clean reference, noisy input, and five baseline systems. Spectrograms of the same signals are shown below.</p>
+      <div class="sample-toolbar">
+        <div class="sample-picker"><label for="sample-select">Sample</label><select id="sample-select"></select><div class="sample-navigation"><button id="previous-sample" class="icon-button" type="button" aria-label="Previous sample">←</button><span id="sample-position">01 / 20</span><button id="next-sample" class="icon-button" type="button" aria-label="Next sample">→</button></div></div>
+        <div class="playback-tools"><label class="sync-label"><input id="sync-position" type="checkbox" checked> Keep position when switching</label><button id="reset-audio" class="text-button" type="button">↺ Reset</button></div>
+      </div>
+      <div class="listening-panel">
+        <div class="listening-heading"><h3 id="sample-title">Sample 0013</h3><p id="sample-meta">16 kHz · Mono · 8 seconds</p></div>
+        <div id="players" class="players"></div>
+        <p id="playback-status" class="playback-status" role="status" aria-live="polite">Play any signal to compare. Only one signal plays at a time.</p>
+        <figure class="spectrogram-comparison"><div class="spectrogram-heading"><h3>Spectrogram comparison</h3><a id="spectrogram-link" href="assets/spectrograms/0013.png" target="_blank" rel="noopener">Open full size ↗</a></div><a id="spectrogram-image-link" href="assets/spectrograms/0013.png" target="_blank" rel="noopener"><img id="spectrogram" src="assets/spectrograms/0013.png" alt="Spectrogram comparison of all eight signals for sample 0013" width="2400" height="870"></a><figcaption>Shared color scale across all eight signals: −80 to 0 dB relative to the largest STFT magnitude. Frequency: 0–8 kHz.</figcaption></figure>
+      </div>
+      <p class="fine-print">All examples are 8-second, 16 kHz mono WAV excerpts. Use headphones for comparison. Waveform heights are normalized for display; original playback levels are preserved.</p>
     </div></section>
 
-    <section class="section container" id="visualization" aria-labelledby="visual-title"><div class="section-heading"><div><p class="eyebrow">INSIDE THE MEMORY</p><h2 id="visual-title"><span>3.</span> Visualization</h2></div><p class="section-aside">Across blocks<br>and frequency branches</p></div><p class="section-description">Explore how MBTLA retains history, gates channels, and aggregates temporal features. The original manuscript figures are followed by a closer look at all four branches over 1,000 test utterances.</p>
+    <section class="section container tab-panel" id="analysis" role="tabpanel" aria-labelledby="tab-analysis" tabindex="0" hidden><div class="section-heading"><div><p class="eyebrow">INSIDE THE MEMORY</p><h2 id="visual-title">Analysis</h2></div><p class="section-aside">Across blocks<br>and frequency branches</p></div><p class="section-description">Explore how MBTLA retains history, gates channels, and aggregates temporal features. The original manuscript figures are followed by a closer look at all four branches over 1,000 test utterances.</p>
       <figure class="paper-figure"><div class="figure-topline"><span>FIGURE 2 / TEMPORAL BEHAVIOR</span><a href="assets/temporal-behavior.png" target="_blank" rel="noopener">Open full size ↗</a></div><a href="assets/temporal-behavior.png" target="_blank" rel="noopener"><img src="assets/temporal-behavior.png" alt="Figure 2: No-retention attention maps, adaptive-retention attention maps, and branch-wise retention rates across seven CLA blocks for a representative ten-second utterance." loading="lazy" width="3200" height="1028"></a><figcaption><strong>Figure 2.</strong> Temporal behavior across the seven CLA blocks for a representative 10-second utterance: no-retention attention (top), adaptive-retention attention (middle), and branch-wise retention rates (bottom). White regions in the attention maps are causally unavailable.</figcaption></figure>
       <div class="insight"><span class="insight-label">READING THE FIGURE</span><p>Blocks 1–2 focus on local context, Blocks 3–4 retain multi-second history, and Blocks 5–7 use shorter or intermediate horizons. Smaller retention rates refresh memory faster; rates near one preserve longer context.</p></div>
       <figure class="paper-figure statistics"><div class="figure-topline"><span>FIGURE 3 / DATASET-LEVEL STATISTICS</span><a href="assets/memory-statistics.png" target="_blank" rel="noopener">Open full size ↗</a></div><a href="assets/memory-statistics.png" target="_blank" rel="noopener"><img src="assets/memory-statistics.png" alt="Figure 3: Mean effective memory horizon tau-90 by block, and mean TRA gate and Linear Attention residual ratios, evaluated over 1,000 test utterances." loading="lazy" width="1800" height="646"></a><figcaption><strong>Figure 3.</strong> Dataset-level statistics over 1,000 test utterances: (a) mean τ<sub>90</sub> per block; (b) mean TRA gate and LA residual ratios. τ<sub>90</sub> is the lookback interval containing 90% of the attention mass.</figcaption></figure>
@@ -64,10 +81,11 @@
       <div class="visual-copy"><p>Averaging the branches can hide distinct memory patterns within a block. In Block 3, Branches 2 and 3 look back about <strong>4.60 and 4.71 seconds</strong>, compared with <strong>0.95 and 0.47 seconds</strong> for Branches 1 and 4. The longer-memory branches change across depth: Branch 4 stands out in Block 5, while Branch 2 does so in Block 7.</p><p>Utterance-level paired tests support an overall branch difference in every block. The separation varies: all four branches in Block 2 remain local, and some branch pairs have similar memory spans.</p></div>
 
       <div class="visual-heading" id="channel-and-context"><p class="eyebrow">CHANNELS & TEMPORAL FEATURES</p><h3>Channel gating and attention output</h3></div>
-      <figure class="paper-figure detailed-figure"><div class="figure-topline"><span>FIGURE 5 / TRA AND LINEAR ATTENTION</span><a href="assets/tra-la-activity.png" target="_blank" rel="noopener">Open full size ↗</a></div><div class="figure-scroll"><a href="assets/tra-la-activity.png" target="_blank" rel="noopener" aria-label="Open the TRA and Linear Attention subfigures at full size"><img src="assets/tra-la-activity.png" alt="Subfigure a: mean TRA sigmoid gates over time and 40 channels for each block. Subfigure b: absolute Linear Attention context RMS over time and four branches, with a shared yellow-to-red color scale and branch mean values." loading="lazy" width="6900" height="4320"></a></div><figcaption><strong>Figure 5.</strong> <strong>(a)</strong> Mean TRA gates across time and channels. <strong>(b)</strong> Absolute RMS of the Linear Attention context, measured before residual addition and output normalization. Both average 1,000 test utterances; each row uses a shared color scale across all blocks. Numbers in (b) are branch means over time. <span class="mobile-figure-hint">Swipe horizontally to inspect the panels.</span></figcaption></figure>
+      <figure class="paper-figure detailed-figure"><div class="figure-topline"><span>FIGURE 5 / TRA AND LINEAR ATTENTION</span><a href="assets/tra-la-activity.png" target="_blank" rel="noopener">Open full size ↗</a></div><div class="figure-scroll"><a href="assets/tra-la-activity.png" target="_blank" rel="noopener" aria-label="Open the TRA and Linear Attention subfigures at full size"><img src="assets/tra-la-activity.png" alt="Subfigure a: mean TRA sigmoid gates over time and 40 channels for each block. Subfigure b: absolute Linear Attention context RMS over time and four branches, with a shared yellow-to-red color scale." loading="lazy" width="6900" height="4320"></a></div><figcaption><strong>Figure 5.</strong> <strong>(a)</strong> Mean TRA gates across time and channels. <strong>(b)</strong> Absolute RMS of the Linear Attention context, measured before residual addition and output normalization. Both average 1,000 test utterances; each row uses a shared color scale across all blocks. <span class="mobile-figure-hint">Swipe horizontally to inspect the panels.</span></figcaption></figure>
       <div class="visual-copy"><p><strong>(a) Channel gating.</strong> TRA scales channels selectively. Its overall mean is about 0.65 in the first two blocks and 0.45 in Block 7. <strong>(b) Context magnitude.</strong> Attention output RMS generally increases with depth, although Block 5 shows a decrease. Memory span and output magnitude differ: Block 6, Branch 2 has a short lookback of 0.087 seconds but the largest RMS in that block, 0.711.</p><p class="fine-print">Samples are aligned by mixture onset, so averaging smooths utterance-specific changes. RMS describes learned feature magnitude rather than a branch’s importance to enhancement quality.</p></div>
     </section>
   </main>
-  <footer class="container"><a class="wordmark" href="#top">MBTLA<span class="title-dot">.</span></a><p>Lightweight speech enhancement · ICASSP 2027 submission</p><a href="https://github.com/WenTone123/mbtla" target="_blank" rel="noopener">View on GitHub ↗</a></footer>
+  <noscript><div class="container notice">Enable JavaScript to switch sections and compare audio. <a href="demo/audio/MBTLA/0013.wav">Listen to an MBTLA example</a>.</div></noscript>
+  <footer class="container"><a class="wordmark" href="#top" aria-label="Back to top">MBTLA<span class="title-dot">.</span></a><p>Anonymous supplementary material · ICASSP 2027 submission</p><a class="back-top" href="#top">Back to top ↑</a></footer>
 </body>
 </html>

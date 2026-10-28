@@ -47,14 +47,16 @@ def main():
             signals.append((label, frequency, times, length, np.abs(spectrum)))
         metadata[sample_id] = {'sampleRate': rate, 'duration': length / rate, 'peaks': peaks}
         reference = max(signal[4].max() for signal in signals)
-        fig, axes = plt.subplots(2, 4, figsize=(16, 7.33), layout='constrained')
-        for ax, (label, freq, times, _, magnitude) in zip(axes.flat, signals):
+        fig, axes = plt.subplots(2, 4, figsize=(16, 5.8), layout='constrained')
+        for i, (ax, (label, freq, times, _, magnitude)) in enumerate(zip(axes.flat, signals)):
             db = 20 * np.log10(np.maximum(magnitude, 1e-12) / max(reference, 1e-12))
             im = ax.pcolormesh(times, freq / 1000, db, shading='auto', cmap='magma', vmin=-80, vmax=0, rasterized=True)
-            ax.set(title=label, xlabel='Time (s)', ylabel='Frequency (kHz)', ylim=(0, 8), xlim=(0, length / rate))
+            ax.set(title=label, xlabel='Time (s)' if i >= 4 else '',
+                   ylabel='Frequency (kHz)' if i % 4 == 0 else '',
+                   ylim=(0, 8), xlim=(0, length / rate))
             ax.title.set_fontsize(12)
             ax.title.set_fontweight('bold')
-            ax.tick_params(labelsize=8)
+            ax.tick_params(labelsize=8, labelbottom=i >= 4, labelleft=i % 4 == 0)
         bar = fig.colorbar(im, ax=axes, shrink=.85, pad=.02)
         bar.set_label('Magnitude (dB, shared reference)', fontsize=10)
         fig.savefig(output / f'{sample_id}.png', dpi=150, facecolor='white')

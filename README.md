@@ -1,28 +1,27 @@
-# MBTLA
+# MBTLA supplementary material
 
-Project page for **MBTLA: Multi-Branch Temporal Linear Attention with Adaptive Retention Gate for Lightweight Speech Enhancement** (ICASSP 2027 submission).
+Supplementary page for **Multi-Branch Temporal Linear Attention with Adaptive Retention Gate for Lightweight Speech Enhancement**.
 
-**Website:** https://wentone123.github.io/mbtla/
+The page has three switchable sections:
 
-The page contains a model introduction, 20 audio comparisons across eight signals, the original manuscript Figures 2 and 3, branch-specific memory maps, and a combined TRA/context-RMS figure with panels (a) and (b). All model descriptions and aggregate metrics come from the supplied manuscript. Demo excerpts are 8-second, 16 kHz mono WAV files. The original audio files are unchanged.
+- **Results:** the manuscript's DNS3 performance comparison, with standard and larger configurations. Best values are emphasized within each group, including ties.
+- **Audio Examples:** 20 samples across eight signals, compact waveform seek controls, and always-visible spectrograms. Only one signal plays at a time. Playback position can carry across methods; leaving the audio section pauses playback.
+- **Analysis:** four figures showing temporal behavior, dataset statistics, branch-specific memory, and TRA/context RMS. The last figure uses a shared absolute RMS scale without per-branch numeric overlays.
 
-## Preview locally
+The page displays no author names, affiliations, contact details, or repository links. Hosting account and repository history remain outside the page content.
 
-Run `python -m http.server 8765` in this directory and visit http://localhost:8765/. No build step, package installation, or external CDN is required.
+## Local preview
 
-## GitHub Pages
+Run `python -m http.server 8765 --bind 127.0.0.1` in this directory and open `http://127.0.0.1:8765/`. No build, package installation, or external CDN is required.
 
-The site is a static page at the repository root. In **Settings → Pages**, use **Deploy from a branch**, branch **main**, folder **/ (root)**. Existing Pages settings can be retained if already configured this way. `.nojekyll` disables unnecessary Jekyll processing. All asset URLs are relative and work beneath `/mbtla/`.
+## Assets
 
-## Audio and figures
+- `assets/app.js` defines exact audio paths, sample IDs, tab navigation, playback, and accessible waveform seek controls.
+- `demo/audio/` contains the original 8-second, 16 kHz mono WAV excerpts. Playback amplitudes are unchanged.
+- `assets/audio-metadata.json` holds durations, sample rates, and per-signal normalized waveform peaks for display only.
+- `assets/spectrograms/` contains comparisons computed from those WAV files, using a 512-point STFT, 256-sample hop, Hann window, and a shared per-sample reference across eight signals (−80 to 0 dB).
+- `assets/temporal-behavior.png`, `assets/memory-statistics.png`, `assets/branch-memory.png`, and `assets/tra-la-activity.png` are the four displayed analysis figures.
 
-- `assets/app.js` defines the sample IDs, display names, and exact audio paths.
-- `demo/audio/` contains the original WAV files, grouped by method.
-- `assets/audio-metadata.json` contains duration, sample rate, and waveform peak data computed from those files. Peaks are normalized per signal for display only; playback amplitudes are unchanged.
-- `assets/spectrograms/` contains spectrogram comparisons regenerated from the WAV files. They use 512-point STFTs, 256-sample hops, a Hann window, and a shared per-sample magnitude reference across all eight methods, displayed from −80 to 0 dB. No perceptual or quality metrics are recomputed or overlaid.
-- `assets/architecture.png`, `assets/temporal-behavior.png`, and `assets/memory-statistics.png` are rendered from the supplied manuscript figures. Full-resolution PNGs open from the figure links.
-- Historical files under `demo/pictures/` are preserved; the page uses regenerated figures with consistent method labels.
+Regenerate audio metadata and compact spectrograms with `python tools/prepare_audio_assets.py` using NumPy, SciPy, and Matplotlib. This reads audio and writes derived display assets only.
 
-To update the audio metadata and spectrograms, run `python tools/prepare_audio_assets.py` with NumPy, SciPy, and Matplotlib available. This only reads the audio files and writes derived assets.
-
-The page uses native audio controls, pauses other players when switching methods, optionally carries over the playback position, and resets playback on sample changes.
+GitHub Pages serves the root of `main`; `.nojekyll` keeps the page static. Asset URLs are relative. URL fragments `#results`, `#audio`, and `#analysis` open the corresponding section, and browser back/forward navigation is supported. Arrow keys, Home, and End switch focused tabs.
