@@ -4,7 +4,7 @@ Supplementary page for **Multi-Branch Temporal Linear Attention with Adaptive Re
 
 The page has three switchable sections:
 
-- **Results:** the manuscript's DNS3 performance comparison, with standard and larger configurations. Best values are emphasized within each group, including ties.
+- **Models Introduction:** a concise model overview, the architecture figure, and the manuscript's DNS3 performance comparison with standard and larger configurations. Best values are emphasized within each group, including ties.
 - **Audio Examples:** 20 samples across eight signals, compact waveform seek controls, and always-visible spectrograms. Only one signal plays at a time. Playback position can carry across methods; leaving the audio section pauses playback.
 - **Analysis:** four figures showing temporal behavior, dataset statistics, branch-specific memory, and TRA/context RMS. The last figure uses a shared absolute RMS scale without per-branch numeric overlays.
 

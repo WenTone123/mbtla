@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Anonymous supplementary material for MBTLA: performance comparisons, audio examples, and temporal attention analysis.">
+  <meta name="description" content="MBTLA supplementary material: model introduction and architecture, performance comparisons, audio examples, and temporal attention analysis.">
   <meta name="theme-color" content="#183d51">
   <title>MBTLA | Supplementary Material</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css?v=20261028">
+  <link rel="stylesheet" href="assets/style.css?v=20261028-intro">
   <script src="assets/app.js?v=20261028" defer></script>
 </head>
 <body>
@@ -21,14 +21,21 @@
   </header>
   <nav class="panel-navigation" aria-label="Supplementary material sections">
     <div class="tab-list" role="tablist" aria-label="Content sections">
-      <button class="tab-button" type="button" id="tab-results" role="tab" aria-selected="true" aria-controls="results" tabindex="0">Results</button>
+      <button class="tab-button" type="button" id="tab-results" role="tab" aria-selected="true" aria-controls="results" tabindex="0">Models Introduction</button>
       <button class="tab-button" type="button" id="tab-audio" role="tab" aria-selected="false" aria-controls="audio" tabindex="-1">Audio Examples</button>
       <button class="tab-button" type="button" id="tab-analysis" role="tab" aria-selected="false" aria-controls="analysis" tabindex="-1">Analysis</button>
     </div>
   </nav>
   <main id="main">
     <section class="section container tab-panel" id="results" role="tabpanel" aria-labelledby="tab-results" tabindex="0">
-      <div class="section-heading"><div><p class="eyebrow">PERFORMANCE COMPARISON</p><h2>Results on DNS3</h2></div><p class="section-aside">Standard and larger<br>model configurations</p></div>
+      <div class="section-heading"><div><p class="eyebrow">THE MODEL</p><h2>Models Introduction</h2></div><p class="section-aside">Causal speech enhancement<br>with adaptive temporal memory</p></div>
+      <div class="model-introduction">
+        <p class="model-lead">MBTLA is a lightweight, causal speech enhancement model that learns how much past context to retain across frequency branches.</p>
+        <p>The model keeps a fixed-resolution ERB-band representation throughout its stacked Causal Linear Attention (CLA) blocks. Bandwise projections compress the features into four frequency branches. Each branch models temporal context independently, while Temporal Recurrent Attention (TRA) selectively scales the channels.</p>
+        <p>An adaptive retention gate controls how quickly each branch refreshes its memory. The same retention is applied to the content and normalization states, keeping the retrieved features consistently normalized. Fixed-size recurrent states support linear-time temporal modeling with bounded state memory.</p>
+      </div>
+      <figure class="paper-figure architecture"><div class="figure-topline"><span>FIGURE 1 / MODEL ARCHITECTURE</span><a href="assets/architecture.png" target="_blank" rel="noopener">Open full size ↗</a></div><a href="assets/architecture.png" target="_blank" rel="noopener" aria-label="Open the MBTLA model architecture at full size"><img src="assets/architecture.png" width="2800" height="1400" alt="MBTLA architecture with ERB BandSplit, stacked CLA blocks, Temporal Recurrent Attention, bandwise compression and expansion, four temporal Linear Attention branches, and magnitude-mask reconstruction."></a><figcaption><strong>Figure 1.</strong> Overall MBTLA architecture. The insets show TRA, bandwise projections, and Linear Attention with adaptive retention.</figcaption></figure>
+      <div class="performance-heading"><p class="eyebrow">PERFORMANCE COMPARISON</p><h3>Results on DNS3</h3></div>
       <p class="section-description">Comparison on the simulated DNS3 test set. MBTLA is highlighted; bold values indicate the best result within each configuration group, including ties.</p>
       <div class="table-card">
         <div class="table-scroll" tabindex="0" role="region" aria-label="Model performance table. Scroll horizontally to see all metrics." aria-describedby="table-note">
